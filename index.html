@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HABLA Budget Tracker</title>
+<style>
+  :root{
+    --ink:#1a2332; --muted:#5f6c7f; --line:#e3e8ef; --bg:#f6f8fb; --card:#fff;
+    --good:#0f8a5f; --warn:#b8791b; --over:#c0392b; --accent:#2b5fa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 64px}
+  header h1{margin:0 0 4px;font-size:26px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .card .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+  .card .val{font-size:27px;font-weight:650;letter-spacing:-.02em}
+  .card .note{font-size:13px;color:var(--muted);margin-top:4px}
+  .hero{background:#0f2d52;border-color:#0f2d52;color:#fff}
+  .hero .lbl,.hero .note{color:#b8cbe4}
+  .banner{background:#fff8e6;border:1px solid #f0d9a0;border-radius:10px;
+    padding:13px 16px;font-size:14px;margin:16px 0 22px;color:#6b5210}
+  .banner b{color:#4a3808}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  #q{flex:1;min-width:240px;padding:12px 14px;font-size:15px;border:1px solid var(--line);
+    border-radius:9px;background:#fff;color:var(--ink)}
+  #q:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{padding:8px 13px;font-size:13px;border:1px solid var(--line);border-radius:20px;
+    background:#fff;cursor:pointer;color:var(--muted)}
+  .chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:550}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+    margin:26px 0 10px;font-weight:600}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+    text-align:right;padding:11px 14px;background:#fafbfd;border-bottom:1px solid var(--line);font-weight:600}
+  th:first-child{text-align:left}
+  td{padding:11px 14px;border-bottom:1px solid #f0f3f7;text-align:right;
+    font-variant-numeric:tabular-nums;font-size:14.5px}
+  td:first-child{text-align:left}
+  tr:last-child td{border-bottom:none}
+  tr.grp td{background:#f4f7fb;font-weight:600;font-size:12.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--muted);padding:9px 14px}
+  .nm{font-weight:520}
+  .cd{color:#9aa7b8;font-size:12px;margin-right:7px;font-variant-numeric:tabular-nums}
+  .bar{height:6px;border-radius:3px;background:#eef1f6;overflow:hidden;margin-top:5px;width:118px;margin-left:auto}
+  .bar i{display:block;height:100%;border-radius:3px}
+  .g{color:var(--good)} .w{color:var(--warn)} .o{color:var(--over);font-weight:600}
+  .bg{background:var(--good)} .bw{background:var(--warn)} .bo{background:var(--over)}
+  .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;
+    background:#fdecea;color:var(--over);margin-left:7px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  tfoot td{font-weight:650;background:#fafbfd;border-top:2px solid var(--line);font-size:15px}
+  .empty{padding:26px;text-align:center;color:var(--muted);background:#fff;
+    border:1px solid var(--line);border-radius:12px;font-size:14.5px}
+  footer{margin-top:32px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
+  @media(max-width:640px){
+    .bar{display:none}
+    td,th{padding:9px 10px;font-size:13.5px}
+    .card .val{font-size:23px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>HABLA Budget Tracker</h1>
+    <div class="sub" id="sub"></div>
+  </header>
+
+  <div class="cards">
+    <div class="card hero">
+      <div class="lbl">Left to spend this year</div>
+      <div class="val" id="left"></div>
+      <div class="note" id="leftNote"></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Money raised so far</div>
+      <div class="val" id="rev"></div>
+      <div class="note" id="revNote"></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Money spent so far</div>
+      <div class="val" id="spent"></div>
+      <div class="note" id="spentNote"></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Cash in vs. cash out</div>
+      <div class="val" id="net"></div>
+      <div class="note" id="netNote"></div>
+    </div>
+  </div>
+
+  <div class="banner" id="banner"></div>
+
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Search for a program, event, or account number — e.g. &quot;gala&quot;, &quot;art&quot;, &quot;6010&quot;" autocomplete="off">
+    <div class="chips">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="spending" aria-pressed="false">Spending only</button>
+      <button class="chip" data-f="income" aria-pressed="false">Income only</button>
+      <button class="chip" data-f="attention" aria-pressed="false">Needs attention</button>
+    </div>
+  </div>
+
+  <div id="out"></div>
+
+  <footer>
+    Budget figures from the approved HABLA FY27 budget. Actuals pulled from QuickBooks.<br>
+    This page is rebuilt automatically every night.
+  </footer>
+</div>
+
+<script>
+const D = {"asOf": "2026-08-06", "fyLabel": "FY27", "fyStart": "2026-07-01", "fyEnd": "2027-06-30", "pctYear": 0.10136986301369863, "elapsedDays": 37, "totalDays": 365, "revenue": [{"code": "4300", "name": "RG Food Drive Donations - Restricted", "group": "Restricted Income", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "4065", "name": "Yearbook", "group": "Unrestricted Income", "budget": 7000.0, "actual": 0.0, "remaining": 7000.0, "pct": 0.0}, {"code": "4615", "name": "Caminata", "group": "Cultural and Fundraising Events", "budget": 38000.0, "actual": 0.0, "remaining": 38000.0, "pct": 0.0}, {"code": "4620", "name": "Gala Night", "group": "Cultural and Fundraising Events", "budget": 51000.0, "actual": 0.0, "remaining": 51000.0, "pct": 0.0}, {"code": "4645", "name": "Donation Drive", "group": "Cultural and Fundraising Events", "budget": 18000.0, "actual": 260.0, "remaining": 17740.0, "pct": 0.014444444444444444}, {"code": "4650", "name": "Baile de los Muertos", "group": "Cultural and Fundraising Events", "budget": 4000.0, "actual": 0.0, "remaining": 4000.0, "pct": 0.0}, {"code": "4710", "name": "Restaurant Nights", "group": "Cultural and Fundraising Events", "budget": 600.0, "actual": 0.0, "remaining": 600.0, "pct": 0.0}, {"code": "4625", "name": "Buy-a-spot", "group": "Ongoing Fundraising", "budget": 9000.0, "actual": 0.0, "remaining": 9000.0, "pct": 0.0}, {"code": "4640", "name": "Merchandise Sales", "group": "Ongoing Fundraising", "budget": 1100.0, "actual": 0.0, "remaining": 1100.0, "pct": 0.0}, {"code": "4800", "name": "Interest Income", "group": "Not in budget", "budget": 0.0, "actual": 529.38, "remaining": -529.38, "pct": null}], "expenses": [{"code": "6010", "name": "Art Program", "group": "Essential Programs", "budget": 12680.0, "actual": 12680.0, "remaining": 0.0, "pct": 1.0}, {"code": "6045", "name": "Recess Support", "group": "Essential Programs", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6050", "name": "Music Program", "group": "Essential Programs", "budget": 15000.0, "actual": 15000.0, "remaining": 0.0, "pct": 1.0}, {"code": "6055", "name": "Science Workshops", "group": "Academic Enrichment", "budget": 17540.0, "actual": 17500.0, "remaining": 40.0, "pct": 0.9977194982896237}, {"code": "6530", "name": "Student Enrichment Scholarships", "group": "Academic Enrichment", "budget": 3000.0, "actual": 0.0, "remaining": 3000.0, "pct": 0.0}, {"code": "6531", "name": "Field Trips", "group": "Academic Enrichment", "budget": 2250.0, "actual": 0.0, "remaining": 2250.0, "pct": 0.0}, {"code": "6620", "name": "Teacher Reimbursement Grants", "group": "Academic Enrichment", "budget": 15050.0, "actual": 0.0, "remaining": 15050.0, "pct": 0.0}, {"code": "6670", "name": "Middle School Learning Opportunities", "group": "Academic Enrichment", "budget": 5716.0, "actual": 0.0, "remaining": 5716.0, "pct": 0.0}, {"code": "6745", "name": "Math Festival", "group": "Academic Enrichment", "budget": 1000.0, "actual": 0.0, "remaining": 1000.0, "pct": 0.0}, {"code": "6025", "name": "Art Show", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6140", "name": "Community Engagement", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6415", "name": "Baile de los Muertos", "group": "Community Events", "budget": 4000.0, "actual": 0.0, "remaining": 4000.0, "pct": 0.0}, {"code": "6735", "name": "Family Sports Night", "group": "Community Events", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6051", "name": "Yearbook", "group": "School and Community Support", "budget": 7001.0, "actual": 0.0, "remaining": 7001.0, "pct": 0.0}, {"code": "6310", "name": "School Beautification", "group": "School and Community Support", "budget": 375.0, "actual": 0.0, "remaining": 375.0, "pct": 0.0}, {"code": "6320", "name": "Board Approved Special Project Fund", "group": "School and Community Support", "budget": 300.0, "actual": 300.0, "remaining": 0.0, "pct": 1.0}, {"code": "6532", "name": "4th Grade Gold Rush", "group": "School and Community Support", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6539", "name": "5th Grade Science Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6546", "name": "8th Grade Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6610", "name": "Teacher and Staff Appreciation", "group": "School and Community Support", "budget": 2000.0, "actual": 0.0, "remaining": 2000.0, "pct": 0.0}, {"code": "6630", "name": "VISA", "group": "School and Community Support", "budget": 550.0, "actual": 0.0, "remaining": 550.0, "pct": 0.0}, {"code": "6685", "name": "Student Activities and Celebrations", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6710", "name": "Child Care - Meetings and Events", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6715", "name": "RG Food Drive", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6720", "name": "Hospitality", "group": "School and Community Support", "budget": 450.0, "actual": 0.0, "remaining": 450.0, "pct": 0.0}, {"code": "6110", "name": "Caminata", "group": "Fundraising Expenses", "budget": 10400.0, "actual": 0.0, "remaining": 10400.0, "pct": 0.0}, {"code": "6120", "name": "Gala Night", "group": "Fundraising Expenses", "budget": 21500.0, "actual": 4472.82, "remaining": 17027.18, "pct": 0.2080381395348837}, {"code": "6350", "name": "Merchandise", "group": "Fundraising Expenses", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6835", "name": "Buy-a-spot", "group": "Fundraising Expenses", "budget": 1800.0, "actual": 0.0, "remaining": 1800.0, "pct": 0.0}, {"code": "6840", "name": "Merchandise Costs and Equipment", "group": "Fundraising Expenses", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6250", "name": "Website Fees", "group": "General and Administrative", "budget": 260.0, "actual": 221.2, "remaining": 38.80000000000001, "pct": 0.8507692307692307}, {"code": "6330", "name": "Communications", "group": "General and Administrative", "budget": 668.0, "actual": 563.9, "remaining": 104.10000000000002, "pct": 0.8441616766467066}, {"code": "6910", "name": "Bookkeeping", "group": "General and Administrative", "budget": 900.0, "actual": 0.0, "remaining": 900.0, "pct": 0.0}, {"code": "6920", "name": "QuickBooks Online Annual Fee", "group": "General and Administrative", "budget": 80.0, "actual": 0.0, "remaining": 80.0, "pct": 0.0}, {"code": "6925", "name": "Tax Preparation & Legal Fees", "group": "General and Administrative", "budget": 2000.0, "actual": 0.0, "remaining": 2000.0, "pct": 0.0}, {"code": "6928", "name": "Taxes and Fees", "group": "General and Administrative", "budget": 90.0, "actual": 20.0, "remaining": 70.0, "pct": 0.2222222222222222}, {"code": "6930", "name": "Insurance", "group": "General and Administrative", "budget": 800.0, "actual": 669.0, "remaining": 131.0, "pct": 0.83625}, {"code": "6935", "name": "Printing and Supplies", "group": "General and Administrative", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6940", "name": "Bank Charges", "group": "General and Administrative", "budget": 50.0, "actual": 0.0, "remaining": 50.0, "pct": 0.0}], "totals": {"revBudget": 128700.0, "revActual": 789.38, "expBudget": 128560.0, "expActual": 51426.92, "moneyLeft": 77133.08, "netBudget": 140.0, "netActual": -50637.54}, "unbudgeted": [{"kind": "revenue", "code": "4800", "name": "Interest Income", "actual": 529.38}]};
+
+const fmt = n => (n<0?"-":"") + "$" + Math.abs(Math.round(n)).toLocaleString();
+const pct = n => Math.round(n*100) + "%";
+const nice = s => new Date(s+"T12:00:00").toLocaleDateString(undefined,
+  {month:"long", day:"numeric", year:"numeric"});
+
+const T = D.totals;
+
+document.getElementById("sub").textContent =
+  "Fiscal year " + nice(D.fyStart) + " – " + nice(D.fyEnd) +
+  "  ·  showing everything through " + nice(D.asOf);
+
+document.getElementById("left").textContent = fmt(T.moneyLeft);
+document.getElementById("leftNote").textContent =
+  "of " + fmt(T.expBudget) + " budgeted · " + pct(T.expActual/T.expBudget) + " already used";
+
+document.getElementById("rev").textContent = fmt(T.revActual);
+document.getElementById("revNote").textContent =
+  pct(T.revActual/T.revBudget) + " of the " + fmt(T.revBudget) + " goal";
+
+document.getElementById("spent").textContent = fmt(T.expActual);
+document.getElementById("spentNote").textContent =
+  pct(T.expActual/T.expBudget) + " of the " + fmt(T.expBudget) + " budget";
+
+document.getElementById("net").textContent = fmt(T.netActual);
+document.getElementById("netNote").textContent =
+  T.netActual < 0 ? "spending is ahead of income right now" : "income is ahead of spending";
+
+/* Plain-language context banner */
+const spendPace = T.expActual / T.expBudget;
+const parts = [];
+parts.push("<b>You are " + pct(D.pctYear) + " of the way through the year</b> (" +
+  D.elapsedDays + " of " + D.totalDays + " days) and have used <b>" +
+  pct(spendPace) + "</b> of the yearly budget.");
+if (spendPace > D.pctYear + 0.08) {
+  parts.push("Spending is running ahead of the calendar. For HABLA this is normal early in the year — " +
+    "program costs like Art, Music and Science are committed up front, while the big fundraisers " +
+    "(Caminata, Gala) have not happened yet, so income arrives later.");
+}
+if (D.unbudgeted.length) {
+  parts.push("<b>Heads up:</b> " + D.unbudgeted.map(u =>
+    u.name + " (" + fmt(u.actual) + ")").join(", ") +
+    " " + (D.unbudgeted.length>1?"have":"has") + " activity but no line in the approved budget.");
+}
+document.getElementById("banner").innerHTML = parts.join(" ");
+
+/* Row severity */
+function rank(l, kind){
+  if (kind === "expenses"){
+    if (l.budget === 0 && l.actual > 0) return "over";
+    if (l.pct === null) return "none";
+    if (l.pct > 1.0001) return "over";
+    if (l.pct >= 0.85) return "warn";
+    return "ok";
+  }
+  if (l.budget === 0) return "none";
+  if (l.pct >= 0.999) return "ok";
+  return "none";
+}
+
+function rowHTML(l, kind){
+  const r = rank(l, kind);
+  const cls = r==="over" ? "o" : r==="warn" ? "w" : "";
+  const bcl = r==="over" ? "bo" : r==="warn" ? "bw" : "bg";
+  const p = l.pct === null ? 0 : Math.min(1, l.pct);
+  const flag = (kind==="expenses" && r==="over")
+      ? '<span class="pill">' + (l.budget===0 ? "no budget" : "over") + '</span>' : "";
+  const remLbl = kind==="expenses" ? "" : "";
+  return '<tr data-k="' + (l.code + " " + l.name + " " + l.group).toLowerCase() +
+      '" data-r="' + r + '" data-kind="' + kind + '">' +
+    '<td><span class="cd">' + l.code + '</span><span class="nm">' + l.name + '</span>' + flag + '</td>' +
+    '<td>' + fmt(l.budget) + '</td>' +
+    '<td>' + fmt(l.actual) + '</td>' +
+    '<td class="' + cls + '">' + fmt(l.remaining) + remLbl + '</td>' +
+    '<td class="' + cls + '">' + (l.pct===null ? "—" : pct(l.pct)) +
+      '<span class="bar"><i class="' + bcl + '" style="width:' + (p*100) + '%"></i></span></td>' +
+  '</tr>';
+}
+
+function tableHTML(title, lines, kind, remainingLabel){
+  const groups = [];
+  lines.forEach(l => {
+    let g = groups.find(x => x.name === l.group);
+    if (!g) groups.push(g = {name:l.group, rows:[]});
+    g.rows.push(l);
+  });
+  let body = "";
+  groups.forEach(g => {
+    body += '<tr class="grp"><td colspan="5">' + g.name + '</td></tr>';
+    g.rows.forEach(l => body += rowHTML(l, kind));
+  });
+  const tb = lines.reduce((s,l)=>s+l.budget,0);
+  const ta = lines.reduce((s,l)=>s+l.actual,0);
+  return '<h2>' + title + '</h2><table data-kind="' + kind + '"><thead><tr>' +
+    '<th>Account</th><th>Budget</th><th>' +
+    (kind==="expenses" ? "Spent" : "Received") + '</th><th>' + remainingLabel +
+    '</th><th>Used</th></tr></thead><tbody>' + body + '</tbody>' +
+    '<tfoot><tr><td>Total</td><td>' + fmt(tb) + '</td><td>' + fmt(ta) +
+    '</td><td>' + fmt(tb-ta) + '</td><td>' + pct(tb?ta/tb:0) + '</td></tr></tfoot></table>';
+}
+
+document.getElementById("out").innerHTML =
+  tableHTML("Spending", D.expenses, "expenses", "Left") +
+  tableHTML("Income", D.revenue, "revenue", "Still to raise");
+
+/* Search + filters */
+let filter = "all";
+const q = document.getElementById("q");
+
+function apply(){
+  const term = q.value.trim().toLowerCase();
+  document.querySelectorAll("table").forEach(tbl => {
+    const kind = tbl.dataset.kind;
+    let shown = 0;
+    let currentGroup = null, groupShown = 0;
+    const rows = [...tbl.querySelectorAll("tbody tr")];
+
+    rows.forEach(tr => {
+      if (tr.classList.contains("grp")){
+        if (currentGroup) currentGroup.style.display = groupShown ? "" : "none";
+        currentGroup = tr; groupShown = 0; return;
+      }
+      let ok = !term || tr.dataset.k.includes(term);
+      if (ok && filter === "spending") ok = kind === "expenses";
+      if (ok && filter === "income")   ok = kind === "revenue";
+      if (ok && filter === "attention") ok = (tr.dataset.r === "over" || tr.dataset.r === "warn");
+      tr.style.display = ok ? "" : "none";
+      if (ok){ shown++; groupShown++; }
+    });
+    if (currentGroup) currentGroup.style.display = groupShown ? "" : "none";
+
+    tbl.style.display = shown ? "" : "none";
+    const h = tbl.previousElementSibling;
+    if (h && h.tagName === "H2") h.style.display = shown ? "" : "none";
+  });
+
+  const any = [...document.querySelectorAll("table")].some(t => t.style.display !== "none");
+  let e = document.getElementById("noHits");
+  if (!any && !e){
+    e = document.createElement("div");
+    e.id = "noHits"; e.className = "empty";
+    document.getElementById("out").appendChild(e);
+  }
+  if (e) {
+    e.style.display = any ? "none" : "";
+    e.textContent = term ? 'Nothing matches "' + q.value.trim() + '".'
+                         : "Nothing to show for this filter.";
+  }
+}
+
+q.addEventListener("input", apply);
+document.querySelectorAll(".chip").forEach(c =>
+  c.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed","false"));
+    c.setAttribute("aria-pressed","true");
+    filter = c.dataset.f;
+    apply();
+  }));
+apply();
+</script>
+</body>
+</html>
