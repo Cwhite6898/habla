@@ -620,6 +620,7 @@ tbody tr.group td{background:var(--panel)}
     <a href="#ahead-of-plan">How we came out ahead</a>
     <a href="#funds">Restricted funds</a>
     <a href="#bank">In the bank</a>
+    <a href="#uncleared">Uncleared checks</a>
     <a href="#raised">Money in</a>
     <a href="#spent">Money out</a>
     <a href="#events">Event by event</a>
@@ -825,14 +826,35 @@ tbody tr.group td{background:var(--panel)}
         <tr><td>Operating checking<span class="what">Day-to-day account</span></td><td class="num">$53,586.37</td></tr>
         <tr><td>Reimbursement account<span class="what">Opened, not yet in use</span></td><td class="num">$2,115.00</td></tr>
         <tr class="total"><td>Total cash on hand</td><td class="num">$256,418.81</td></tr>
+        <tr><td>Less: checks written but not yet cashed<span class="what">See Section 05</span></td><td class="num neg">($2,637.61)</td></tr>
+        <tr class="total"><td>True cash available</td><td class="num pos">$253,781.20</td></tr>
       </tbody>
     </table>
-    <p class="note">This is total cash, not this year's profit. It includes reserves built up over many prior years. In June we moved $110,000 from checking into savings to earn interest.</p>
+    <p class="note">This is total cash, not this year's profit. It includes reserves built up over many prior years. In June we moved $110,000 from checking into savings to earn interest. "True cash available" is the more honest planning number — it excludes money that's already spent but hasn't left the account yet, and is the figure used in Section 09 (Looking Ahead).</p>
+  </section>
+
+  <!-- ===== UNCLEARED CHECKS ===== -->
+  <section id="uncleared">
+    <h2 class="sec"><span class="no">05</span>Uncleared checks <span class="r">$2,637.61 outstanding</span></h2>
+    <p class="lede">These 11 checks were written and recorded as FY26 expenses by June 30, but hadn't been cashed by their recipients yet, per the bookkeeper's reconciliation of the operating checking account. None of this money is missing or at risk — it's already accounted for in this year's spending, just sitting in the bank a little longer until each check clears.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Date written</th><th class="num">Checks</th><th class="num">Amount</th><th class="num">Age, as of the reconciliation</th></tr></thead>
+      <tbody>
+        <tr><td>5/20/2026</td><td class="num">1</td><td class="num">$55.52</td><td class="num">11 weeks</td></tr>
+        <tr><td>6/2/2026</td><td class="num">3</td><td class="num">$1,005.49</td><td class="num">9 weeks</td></tr>
+        <tr><td>6/15/2026</td><td class="num">4</td><td class="num">$988.26</td><td class="num">7 weeks</td></tr>
+        <tr><td>6/25/2026</td><td class="num">3</td><td class="num">$588.34</td><td class="num">6 weeks</td></tr>
+        <tr class="total"><td>Total outstanding, as of 6/30/2026</td><td class="num">11</td><td class="num">$2,637.61</td><td class="num"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Per the bookkeeper's reconciliation of the operating checking account, performed 8/6/2026. Payee detail is on file with the bookkeeper and Treasurer but omitted here, since these are individual reimbursements to staff, teachers, and vendors. Our finance policy recommends a follow-up on any check still outstanding after 3 months (about 13 weeks); none have reached that mark yet, but the oldest is getting close.</p>
   </section>
 
   <!-- ===== WHERE THE MONEY CAME FROM ===== -->
   <section id="raised">
-    <h2 class="sec"><span class="no">05</span>Where the money came from <span class="r">$126,527 raised</span></h2>
+    <h2 class="sec"><span class="no">06</span>Where the money came from <span class="r">$126,527 raised</span></h2>
     <p class="lede">Bars show performance against the approved budget. Green means the line met or beat its target.</p>
 
     <div class="scroll">
@@ -911,7 +933,7 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== WHERE THE MONEY WENT ===== -->
   <section id="spent">
-    <h2 class="sec"><span class="no">06</span>Where the money went <span class="r">$112,166 on programs</span></h2>
+    <h2 class="sec"><span class="no">07</span>Where the money went <span class="r">$112,166 on programs</span></h2>
     <p class="lede">Programs and school support, largest first.</p>
 
     <div class="scroll">
@@ -1064,7 +1086,7 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== EVENT BY EVENT ===== -->
   <section id="events">
-    <h2 class="sec"><span class="no">07</span>Event by event <span class="r">What each one netted</span></h2>
+    <h2 class="sec"><span class="no">08</span>Event by event <span class="r">What each one netted</span></h2>
 
     <div class="scroll">
     <table class="striped">
@@ -1240,7 +1262,7 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== PROGRAMS IN DETAIL ===== -->
   <section id="programs">
-    <h2 class="sec"><span class="no">08</span>Programs in detail</h2>
+    <h2 class="sec"><span class="no">09</span>Programs in detail</h2>
 
     <h3 class="sub">Teacher grants <span class="r">$19,930</span></h3>
     <p class="lede"><b>28 teachers and staff</b> received classroom reimbursement grants totaling $12,930, and a separate $7,000 sent River Glen School to the ATDLE dual-language conference. Most teachers were funded to a $600 cap across the year. Grants went out in two rounds, October 2025 and May 2026.</p>
@@ -1317,7 +1339,7 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== LOOKING AHEAD ===== -->
   <section id="ahead">
-    <h2 class="sec"><span class="no">09</span>Looking ahead to 2026–27</h2>
+    <h2 class="sec"><span class="no">10</span>Looking ahead to 2026–27</h2>
     <p class="lede">Our finance policy defines a specific way to answer "how much of this money is actually uncommitted?" Rather than treating the whole bank balance as available, it holds back a full year of planned expenses plus a cushion in case fundraising underperforms.</p>
 
     <div class="panel">
@@ -1329,16 +1351,16 @@ tbody tr.group td{background:var(--panel)}
     <table>
       <thead><tr><th>Step</th><th class="num">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Cash in the bank, June 30, 2026</td><td class="num">$256,418.81</td></tr>
+        <tr><td>True cash available, June 30, 2026<span class="what">Total cash on hand, less $2,637.61 in uncleared checks — see Section 05</span></td><td class="num">$253,781.20</td></tr>
         <tr><td>Less: everything planned for 2026–27</td><td class="num neg">($128,560.00)</td></tr>
         <tr><td>Less: safety buffer, 5–10% of projected revenue</td><td class="num neg">($6,435) – ($12,870)</td></tr>
-        <tr class="total"><td>Uncommitted funds</td><td class="num">$114,989 – $121,424</td></tr>
+        <tr class="total"><td>Uncommitted funds</td><td class="num">$112,351 – $118,786</td></tr>
       </tbody>
     </table>
     </div>
 
-    <p class="lede">Depending on where the board sets the buffer, roughly <b>$115,000 to $121,000</b> is uncommitted heading into the new school year. Under the policy, money in this category is directed toward <b>non-recurring</b> uses — one-time expenses or multi-year special projects — approved by the board at the start of the school year. It isn't intended to fund ongoing operating costs, since those have to be sustainable on each year's fundraising.</p>
-    <p class="note">Based on the Excess Funds formula in the 2025 draft finance policy revision, and the FY27 budget as most recently approved. Separately, the policy requires reserving enough to run art, music and recess support the following year even if fundraising falls short; those programs are already funded inside the 2026–27 projected expenses above.</p>
+    <p class="lede">Depending on where the board sets the buffer, roughly <b>$112,000 to $119,000</b> is uncommitted heading into the new school year. Under the policy, money in this category is directed toward <b>non-recurring</b> uses — one-time expenses or multi-year special projects — approved by the board at the start of the school year. It isn't intended to fund ongoing operating costs, since those have to be sustainable on each year's fundraising.</p>
+    <p class="note">Based on the Excess Funds formula in the 2025 draft finance policy revision, and the FY27 budget as most recently approved. This uses true cash available (net of uncleared checks) rather than the gross bank balance, since $2,637.61 of that balance is already committed to checks written but not yet cashed. Separately, the policy requires reserving enough to run art, music and recess support the following year even if fundraising falls short; those programs are already funded inside the 2026–27 projected expenses above.</p>
 
     <table style="margin-top:26px">
       <caption>The 2026–27 budget at a glance</caption>
@@ -1450,7 +1472,7 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== ABOUT THESE NUMBERS ===== -->
   <section id="notes">
-    <h2 class="sec"><span class="no">10</span>About these numbers</h2>
+    <h2 class="sec"><span class="no">11</span>About these numbers</h2>
 
     <div class="panel">
       <p class="ph">The $21,000 science program — under review</p>
