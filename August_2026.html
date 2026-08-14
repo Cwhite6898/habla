@@ -20,7 +20,7 @@
   --muted:#6e7078;
   --pad:clamp(18px,4vw,54px);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--panel-2);color:var(--ink);
@@ -121,6 +121,12 @@ footer{margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);font-siz
   section{margin-top:26px}
   tr,li,.stat,.strip,.signoff{break-inside:avoid}
   h2.sec{break-after:avoid}
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+  .stat{padding:14px 12px;min-width:0}
+  .stat .v{font-size:19px;white-space:nowrap}
+  .stat .k{font-size:9.5px}
+  /* never let a half-finished animation freeze a bar at partial width */
+  .bar .fill{animation:none !important;transform:none !important}
   @page{margin:14mm}
 }
 @media (prefers-reduced-motion:no-preference){
@@ -208,7 +214,7 @@ footer{margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);font-siz
           <td class="num">53,586.37</td><td class="num">21,271.14</td><td class="num neg">−32,315.23</td>
         </tr>
         <tr>
-          <td>Second checking account</td>
+          <td>Reimbursement Checking<span class="what">Used to pay Konstella and the Gala venue deposit; no activity in July</span></td>
           <td class="num">2,115.00</td><td class="num">2,115.00</td><td class="num">0.00</td>
         </tr>
         <tr>
@@ -221,7 +227,25 @@ footer{margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);font-siz
         </tr>
       </tbody>
     </table>
-    <p class="lede" style="font-size:14px;color:var(--muted);margin-top:14px">QuickBooks shows the Konstella payment and the Gala venue deposit posting through a "Reimbursement Checking" account, which is separate from the three accounts above. We don't yet have a Wells Fargo statement for it — see note below.</p>
+    <p class="lede" style="font-size:14px;color:var(--muted);margin-top:14px">Reimbursement Checking is included in the total above. Its July statement shows no activity, since the Konstella payment and Gala deposit both happened in August — we'll see them on next month's statement.</p>
+  </section>
+
+  <section>
+    <h2 class="sec">Outstanding checks <span class="r">$1,309.58 not yet cashed, as of August 10</span></h2>
+    <p class="lede">These have been written and mailed but haven't cleared the bank yet, so they still reduce what's actually available in Operating checking above.</p>
+    <table>
+      <thead>
+        <tr><th>Check #</th><th>Written</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>5573</td><td>5/20</td><td class="num">55.52</td></tr>
+        <tr><td>5598</td><td>6/2</td><td class="num">652.00</td></tr>
+        <tr><td>5602</td><td>6/2</td><td class="num">48.95</td></tr>
+        <tr><td>5606</td><td>6/15</td><td class="num">184.39</td></tr>
+        <tr><td>5611</td><td>6/25</td><td class="num">368.72</td></tr>
+        <tr class="total"><td colspan="2">Total outstanding</td><td class="num">1,309.58</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section>
@@ -290,16 +314,17 @@ footer{margin-top:40px;padding-top:16px;border-top:2px solid var(--ink);font-siz
 
   <section>
     <h2 class="sec">What happened in July</h2>
-    <p class="lede">Three checks to River Glen School for the art, music and science programs came to <b>$45,180</b> — that is 97% of everything spent so far this year, and those programs are now fully paid for. The rest was annual renewals for insurance, the website and Zoom, a state filing fee, and a $300 board-approved GoFundMe contribution for a school family.</p>
-    <p class="lede">On the income side, a $260 donation arrived through workplace giving, the savings account earned $529.38 in interest, and a small $9.80 merchandise sale came through. Fundraising season starts with Caminata in the fall.</p>
-    <p class="lede">In early August we also sent the first deposit on the Gala venue contract ($4,472.82 to Sonesta), paid the annual Konstella subscription ($399), covered a facility rental through Facilitron ($233.77), and hosted a staff appreciation event at Panera ($428.49).</p>
+    <p class="lede">Three checks to River Glen School for the art, music and science programs came to <b>$45,180</b> — the largest expense so far this year, and those programs are now fully paid for. The rest was annual renewals for insurance, the website and Zoom, a state filing fee, and a $300 board-approved GoFundMe contribution for a school family.</p>
+    <p class="lede">On the income side, a $260 donation arrived through workplace giving, the savings account earned $529.38 in interest, and a small $9.80 merchandise sale came through. A corporate matching drive starts this fall, with Gala Night in March and Caminata in April.</p>
+    <p class="lede">In early August we also sent the first deposit on the Gala venue contract ($4,472.82 to Sonesta), paid the annual Konstella subscription ($399), covered a facility rental through Facilitron ($233.77), and catered a staff appreciation brunch through Panera ($428.49).</p>
   </section>
 
   <section>
     <h2 class="sec">For the board's attention</h2>
     <ul class="flags">
       <li><span>The savings account's 3.30% interest rate ends September 8. At our current balance that is worth about $500 a month.</span></li>
-      <li><span>QuickBooks shows a "Reimbursement Checking" account paying the Konstella and Gala payments. We don't have Wells Fargo statements for it yet — worth confirming what it is and getting it added to our regular statement review.</span></li>
+      <li><span>A $171.14 online store deposit posted to the bank August 7 but hasn't shown up in QuickBooks yet — worth flagging to the bookkeeper so it gets recorded.</span></li>
+      <li><span>Five checks from May and June, $1,309.58 total, still haven't been cashed. The oldest is from May 20 — worth checking in with those payees or considering reissuing.</span></li>
     </ul>
   </section>
 
