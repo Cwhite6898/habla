@@ -617,7 +617,7 @@ tbody tr.group td{background:var(--panel)}
   <!-- ===== NAVIGATION ===== -->
   <nav class="toc" aria-label="Report sections">
     <a href="#landed">Where we landed</a>
-    <a href="#ahead-of-plan">How we came out ahead</a>
+    <a href="#ahead-of-plan">How we came out</a>
     <a href="#funds">Restricted funds</a>
     <a href="#bank">In the bank</a>
     <a href="#uncleared">Uncleared checks</a>
@@ -630,17 +630,6 @@ tbody tr.group td{background:var(--panel)}
   </nav>
 
   <!-- ===== PENDING REVIEW FLAG ===== -->
-  <div class="flagbox">
-    <div class="fh">One number in this report is under review</div>
-    <p>A $21,000 accounting entry from last fiscal year — for a science program paid for in June 2025 but delivered this year — may not be correctly reflected in this year's total. We're confirming the fix with our bookkeeper. Depending on the outcome, the General Fund result below could land anywhere in this range:</p>
-    <div class="range">
-      <span>As currently booked: <b class="lo">+$1,063</b></span>
-      <span>&rarr;</span>
-      <span>If corrected into this year: <b class="hi">−$19,937</b></span>
-    </div>
-    <p style="margin-top:9px">Full explanation in <a href="#notes">About these numbers</a>.</p>
-  </div>
-
   <!-- ===== WHERE WE STAND ===== -->
   <div class="strip" id="landed">
     <h2>Where we landed</h2>
@@ -652,11 +641,11 @@ tbody tr.group td{background:var(--panel)}
     </div>
 
     <div class="track">
-      <div class="lab"><span>Money spent</span><span class="v">77% of the year's plan</span></div>
-      <div class="bar"><span class="fill f-exp" style="width:77%"></span></div>
+      <div class="lab"><span>Money spent</span><span class="v">90% of the year's plan</span></div>
+      <div class="bar"><span class="fill f-exp" style="width:90%"></span></div>
     </div>
 
-    <p class="readout">HABLA budgeted a <b>$12,695 loss</b> for the year. Where the year actually landed against that plan is under review — see the flag above.</p>
+    <p class="readout">HABLA budgeted a <b>$12,695 loss</b> for the year and finished at a <b>$18,844 loss</b> — about $6,149 worse than plan. Fundraising fell 15% short of target; spending came in 10% under budget, which absorbed most but not all of the gap.</p>
   </div>
 
   <!-- ===== HEADLINE NUMBERS ===== -->
@@ -668,13 +657,13 @@ tbody tr.group td{background:var(--panel)}
     </div>
     <div class="stat">
       <div class="k">Money spent</div>
-      <div class="v">$124,374</div>
-      <div class="n">77% of the $161,445 planned</div>
+      <div class="v">$145,374</div>
+      <div class="n">90% of the $161,445 planned</div>
     </div>
     <div class="stat">
-      <div class="k">Left over<span class="pending">Pending</span></div>
-      <div class="v pos">+$2,156</div>
-      <div class="n">$1,090 restricted; General Fund result under review — see flag above</div>
+      <div class="k">Shortfall</div>
+      <div class="v neg">−$18,844</div>
+      <div class="n">General Fund −$19,937; restricted Food Drive +$1,090</div>
     </div>
     <div class="stat">
       <div class="k">In the bank</div>
@@ -686,8 +675,8 @@ tbody tr.group td{background:var(--panel)}
 
   <!-- ===== HOW WE CAME OUT AHEAD ===== -->
   <section id="ahead-of-plan">
-    <h2 class="sec"><span class="no">01</span>How we came out — General Fund<span class="r">Pending confirmation</span></h2>
-    <p class="lede">The General Fund budget for the year planned a <b>$12,195 deficit</b>. As currently booked, we finished <b>$1,063 ahead</b> of that plan — but one $21,000 entry is under review with our bookkeeper (see the flag at the top of this report), and depending on how it's resolved the real result could be as low as <b>−$19,937</b>. What follows shows the numbers as currently booked, with that one line called out where it matters.</p>
+    <h2 class="sec"><span class="no">01</span>How we came out — General Fund<span class="r">−$19,937</span></h2>
+    <p class="lede">The General Fund budget for the year planned a <b>$12,195 deficit</b>. We finished at <b>−$19,936.53</b>, about <b>$7,742 worse</b> than that plan. The cause is entirely on the revenue side: fundraising came up $22,683 short, and cutting spending by $14,942 covered about two-thirds of the gap.</p>
     <p class="note" style="border-top:none;padding-top:0;margin-top:-4px">These figures are the General Fund only. Restricted Food Drive money is excluded here and shown separately in the next section.</p>
 
     <div class="scroll">
@@ -697,8 +686,8 @@ tbody tr.group td{background:var(--panel)}
         <tr><td><b>Budgeted result</b></td>
             <td class="num neg">−$12,195</td><td class="num neg">−$12,195</td></tr>
         <tr><td>Raised less than planned</td><td class="num neg">−$22,683</td><td class="num neg">−$34,878</td></tr>
-        <tr><td>Spent less than planned</td><td class="num pos">+$35,942</td><td class="num pos">+$1,063</td></tr>
-        <tr class="total"><td><b>As currently booked</b><span class="pending">Pending</span></td><td class="num pos">+$13,258<span class="what">vs. plan</span></td><td class="num pos">+$1,063</td></tr>
+        <tr><td>Spent less than planned</td><td class="num pos">+$14,942</td><td class="num neg">−$19,937</td></tr>
+        <tr class="total"><td><b>Where we finished</b></td><td class="num neg">−$7,742<span class="what">vs. plan</span></td><td class="num neg">−$19,937</td></tr>
       </tbody>
     </table>
     </div>
@@ -731,13 +720,12 @@ tbody tr.group td{background:var(--panel)}
     </table>
     </div>
 
-    <h3 class="sub">Money out <span class="r">+$35,942 vs. plan</span></h3>
+    <h3 class="sub">Money out <span class="r">+$14,942 vs. plan</span></h3>
     <p class="lede">Almost every line came in under budget. The largest single item is a bookkeeping adjustment rather than a saving — see the note below the table.</p>
     <div class="scroll">
     <table>
       <thead><tr><th>Spent less than budgeted</th><th class="num">Actual</th><th class="num">Budget</th><th class="num">Under by</th></tr></thead>
       <tbody>
-        <tr><td>Prepaid expense adjustment<span class="what">Accounting entry, not a saving</span></td><td class="num">−$21,000</td><td class="num">—</td><td class="num pos">+$21,000</td></tr>
         <tr><td>Caminata costs</td><td class="num">$8,995</td><td class="num">$11,411</td><td class="num pos">+$2,416</td></tr>
         <tr><td>Gala costs</td><td class="num">$21,029</td><td class="num">$22,950</td><td class="num pos">+$1,921</td></tr>
         <tr><td>Communications</td><td class="num">$66</td><td class="num">$1,549</td><td class="num pos">+$1,483</td></tr>
@@ -748,7 +736,7 @@ tbody tr.group td{background:var(--panel)}
         <tr><td>Insurance</td><td class="num">$0</td><td class="num">$800</td><td class="num pos">+$800</td></tr>
         <tr><td>Teacher grants</td><td class="num">$19,930</td><td class="num">$20,650</td><td class="num pos">+$720</td></tr>
         <tr class="dim"><td>All other lines combined</td><td class="num"></td><td class="num"></td><td class="num pos">+$3,135</td></tr>
-        <tr class="total"><td>Total underspend</td><td class="num"></td><td class="num"></td><td class="num pos">+$36,207</td></tr>
+        <tr class="total"><td>Total underspend</td><td class="num"></td><td class="num"></td><td class="num pos">+$15,207</td></tr>
       </tbody>
     </table>
     </div>
@@ -766,11 +754,9 @@ tbody tr.group td{background:var(--panel)}
     </div>
 
     <div class="panel">
-      <p class="ph">The $21,000 line, explained</p>
-      <p>One item in the underspend table above — <b>"Prepaid expense adjustment," +$21,000</b> — isn't money we chose not to spend. It's an accounting entry for a science program that was paid for in June 2025 (last fiscal year) but delivered this year. Depending on which fiscal year it's ultimately booked to:</p>
-      <p><b class="pos">If it stays as currently booked:</b> the General Fund result stands at <b>+$1,063</b>, as shown above.<br>
-      <b class="neg">If it's corrected into this year</b> (recognizing the full $21,000 as an FY26 expense): real underspending was about $14,942 against a $22,683 revenue shortfall, and the General Fund result becomes <b>−$19,937</b> — about $7,742 worse than the plan the board approved.</p>
-      <p>We're confirming which treatment is correct with our bookkeeper. Full detail in <a href="#notes">About these numbers</a>.</p>
+      <p class="ph">Why the deficit isn't an overspending problem</p>
+      <p>Spending finished <b>$14,942 under budget</b> — 29 lines came in under, only 4 came in over, and those 4 exceeded budget by just $266 combined. Art, Recess, Music and Field Trips all landed exactly on budget.</p>
+      <p>The deficit is a <b>revenue</b> story. Two fundraisers accounted for most of it: the Fall Donation Drive raised 38% of its target and Buy-a-Spot raised 33%, together falling $20,313 short. Cutting spending absorbed about two-thirds of the total shortfall, leaving $7,742 uncovered.</p>
     </div>
   </section>
 
@@ -787,17 +773,17 @@ tbody tr.group td{background:var(--panel)}
       <tbody>
         <tr><td>Raised</td><td class="num">$123,366.79</td><td class="num">$3,160.15</td><td class="num">$126,526.94</td></tr>
         <tr><td>Spent</td><td class="num">$122,303.32</td><td class="num">$2,070.30</td><td class="num">$124,373.62</td></tr>
-        <tr class="total"><td>Left over</td><td class="num pos">$1,063.47</td><td class="num">$1,089.85</td><td class="num">$2,153.32</td></tr>
+        <tr class="total"><td>Left over</td><td class="num neg">($19,936.53)</td><td class="num pos">$1,089.85</td><td class="num neg">($18,846.68)</td></tr>
       </tbody>
     </table>
     </div>
 
     <div class="panel">
       <p class="ph">What this means</p>
-      <p>The General Fund — the money the board actually controls — came out <b>$1,063 ahead</b>.</p>
+      <p>The General Fund — the money the board actually controls — finished <b>$19,937 in deficit</b>, funded from reserves as planned.</p>
       <p>The remaining <b>$1,089.85 of unspent Food Drive donations stays restricted</b> and carries into next year, still obligated to Food Drive purposes. It shouldn't be treated as available surplus.</p>
     </div>
-    <p class="note">A further $2.25 of savings interest brings the total net for the year to $2,155.57 as reported on the books.</p>
+    <p class="note">A further $2.25 of savings interest brings the total net for the year to −$18,844.43 as reported on the books.</p>
   </section>
 
   <!-- ===== HOW EVERY DOLLAR WAS USED ===== -->
@@ -813,7 +799,7 @@ tbody tr.group td{background:var(--panel)}
       <span><i style="background:var(--marigold)"></i>Cost of running fundraisers — $30,133</span>
       <span><i style="background:var(--clay)"></i>Admin &amp; overhead — $3,074</span>
     </div>
-    <p class="note">Based on $145,374 of gross spending. A one-time $21,000 bookkeeping adjustment — the item under review; see the flag at the top of this report — brings the figure on the books down to $124,374.</p>
+    <p class="note">Based on $145,374 of total spending for the year.</p>
   </section>
 
   <!-- ===== CASH ===== -->
@@ -827,10 +813,11 @@ tbody tr.group td{background:var(--panel)}
         <tr><td>Reimbursement account<span class="what">Opened, not yet in use</span></td><td class="num">$2,115.00</td></tr>
         <tr class="total"><td>Total cash on hand</td><td class="num">$256,418.81</td></tr>
         <tr><td>Less: checks written but not yet cashed<span class="what">See Section 05</span></td><td class="num neg">($2,637.61)</td></tr>
-        <tr class="total"><td>True cash available</td><td class="num pos">$253,781.20</td></tr>
+        <tr><td>Less: restricted Food Drive funds<span class="what">Can only be spent on the Food Drive</span></td><td class="num neg">($1,089.85)</td></tr>
+        <tr class="total"><td>Unrestricted cash available</td><td class="num pos">$252,691.35</td></tr>
       </tbody>
     </table>
-    <p class="note">This is total cash, not this year's profit. It includes reserves built up over many prior years. In June we moved $110,000 from checking into savings to earn interest. "True cash available" is the more honest planning number — it excludes money that's already spent but hasn't left the account yet, and is the figure used in Section 09 (Looking Ahead).</p>
+    <p class="note">This is total cash, not this year's profit. It includes reserves built up over many prior years. In June we moved $110,000 from checking into savings to earn interest. "Unrestricted cash available" is the more honest planning number — it excludes money that's already spent but hasn't left the account yet, plus restricted funds the board can't redirect. It's the figure used in Section 10 (Looking Ahead).</p>
   </section>
 
   <!-- ===== UNCLEARED CHECKS ===== -->
@@ -1022,15 +1009,12 @@ tbody tr.group td{background:var(--panel)}
           <td><span class="pct dim">0%</span><span class="meter"></span></td></tr>
         <tr class="dim"><td>Website</td><td class="num">$0</td><td class="num">$60</td>
           <td><span class="pct dim">0%</span><span class="meter"></span></td></tr>
-        <tr class="dim"><td>Prepaid expense adjustment<span class="what">Under review — see flag at top of report</span></td><td class="num">($21,000)</td><td class="num">—</td>
-          <td></td></tr>
-        <tr class="total"><td>Total admin &amp; overhead<span class="pending">Pending</span></td><td class="num">($17,926)</td><td class="num">$6,259</td>
-          <td></td></tr>
+        <tr class="total"><td>Total admin &amp; overhead</td><td class="num">$3,074</td><td class="num">$6,259</td>
+          <td><span class="pct">49%</span><span class="meter"><i style="width:49.1%"></i></span></td></tr>
       </tbody>
     </table>
     </div>
-    <p class="note">The line above is the same $21,000 entry flagged at the top of this report. Excluding it, admin &amp; overhead totals a more typical <b>$3,074</b>, 49% of its $6,259 budget.</p>
-    <p class="note">Insurance and website fees were budgeted but show no payment this fiscal year.</p>
+        <p class="note">Insurance and website fees were budgeted but show no payment this fiscal year.</p>
 
     <details>
       <summary>Every program line, itemized</summary>
@@ -1351,24 +1335,24 @@ tbody tr.group td{background:var(--panel)}
     <table>
       <thead><tr><th>Step</th><th class="num">Amount</th></tr></thead>
       <tbody>
-        <tr><td>True cash available, June 30, 2026<span class="what">Total cash on hand, less $2,637.61 in uncleared checks — see Section 05</span></td><td class="num">$253,781.20</td></tr>
+        <tr><td>Unrestricted cash available, June 30, 2026<span class="what">Total cash on hand, less $2,637.61 in uncleared checks and $1,089.85 in restricted Food Drive funds</span></td><td class="num">$252,691.35</td></tr>
         <tr><td>Less: everything planned for 2026–27</td><td class="num neg">($128,560.00)</td></tr>
         <tr><td>Less: safety buffer, 5–10% of projected revenue</td><td class="num neg">($6,435) – ($12,870)</td></tr>
-        <tr class="total"><td>Uncommitted funds</td><td class="num">$112,351 – $118,786</td></tr>
+        <tr class="total"><td>Uncommitted funds</td><td class="num">$111,261 – $117,696</td></tr>
       </tbody>
     </table>
     </div>
 
-    <p class="lede">Depending on where the board sets the buffer, roughly <b>$112,000 to $119,000</b> is uncommitted heading into the new school year. Under the policy, money in this category is directed toward <b>non-recurring</b> uses — one-time expenses or multi-year special projects — approved by the board at the start of the school year. It isn't intended to fund ongoing operating costs, since those have to be sustainable on each year's fundraising.</p>
-    <p class="note">Based on the Excess Funds formula in the 2025 draft finance policy revision, and the FY27 budget as most recently approved. This uses true cash available (net of uncleared checks) rather than the gross bank balance, since $2,637.61 of that balance is already committed to checks written but not yet cashed. Separately, the policy requires reserving enough to run art, music and recess support the following year even if fundraising falls short; those programs are already funded inside the 2026–27 projected expenses above.</p>
+    <p class="lede">Depending on where the board sets the buffer, roughly <b>$111,000 to $118,000</b> is uncommitted heading into the new school year. Under the policy, money in this category is directed toward <b>non-recurring</b> uses — one-time expenses or multi-year special projects — approved by the board at the start of the school year. It isn't intended to fund ongoing operating costs, since those have to be sustainable on each year's fundraising.</p>
+    <p class="note">Based on the Excess Funds formula in the 2025 draft finance policy revision, and the FY27 budget as most recently approved. This uses unrestricted cash available rather than the gross bank balance: $2,637.61 is already committed to checks written but not yet cashed, and $1,089.85 is restricted Food Drive money the board cannot redirect. Separately, the policy requires reserving enough to run art, music and recess support the following year even if fundraising falls short; those programs are already funded inside the 2026–27 projected expenses above.</p>
 
     <table style="margin-top:26px">
       <caption>The 2026–27 budget at a glance</caption>
       <thead><tr><th></th><th class="num">2025–26 actual</th><th class="num">2026–27 budget</th></tr></thead>
       <tbody>
         <tr><td>Money raised</td><td class="num">$126,527</td><td class="num">$128,700</td></tr>
-        <tr><td>Money spent</td><td class="num">$124,374</td><td class="num">$128,560</td></tr>
-        <tr class="total"><td>Planned result</td><td class="num pos">+$2,156</td><td class="num pos">+$140</td></tr>
+        <tr><td>Money spent</td><td class="num">$145,374</td><td class="num">$128,560</td></tr>
+        <tr class="total"><td>Result</td><td class="num neg">($18,844)</td><td class="num pos">+$140</td></tr>
       </tbody>
     </table>
 
@@ -1475,10 +1459,10 @@ tbody tr.group td{background:var(--panel)}
     <h2 class="sec"><span class="no">11</span>About these numbers</h2>
 
     <div class="panel">
-      <p class="ph">The $21,000 science program — under review</p>
-      <p>In June 2025 (the prior fiscal year), HABLA paid $21,000 for the Schmahl Science program, which ran during this fiscal year. That payment correctly created a prepaid asset on the balance sheet at the time.</p>
-      <p>When the program ran this year, a journal entry recognized the $21,000 as this year's Science Workshops expense — that part is right, and it's why the Science Workshops line correctly shows $21,048. But the entry credited that $21,000 back out through an <em>expense</em> account rather than clearing the original prepaid <em>asset</em>. The practical effect: the $21,000 expense gets cancelled out of this year's total instead of properly reducing the leftover asset, and — as of the June 30, 2026 balance sheet — the $21,000 asset is still sitting on the books for a program that's already finished.</p>
-      <p>We're working with our bookkeeper on the correcting entry and confirming which fiscal year it should land in. Until that's settled, this report shows figures both ways rather than picking one — see the flag at the top of this report and the range shown in <a href="#ahead-of-plan">"How we came out."</a></p>
+      <p class="ph">The $21,000 science program — resolved</p>
+      <p>In June 2025 (the prior fiscal year), HABLA paid $21,000 for the Schmahl Science program, which ran during this fiscal year. Because the program hadn't been delivered yet, our CPA correctly recorded that payment as a prepaid asset rather than a prior-year expense — it appears as such on the filed return for the year ending June 30, 2025.</p>
+      <p>When the program ran this year, the cost needed to move from that prepaid asset into this year's expenses. An initial journal entry did this incorrectly, offsetting the expense through another expense account instead of clearing the asset — which cancelled the $21,000 out of the year's total and left a stale asset on the balance sheet.</p>
+      <p><b>Our bookkeeper posted a correcting entry, and the figures in this report reflect it.</b> The $21,000 is now properly recognized as a fiscal-year 2026 expense, and the prepaid asset has been cleared. No cash moved as a result of the correction — that money left the bank in June 2025 — so cash balances and the excess funds calculation are unaffected.</p>
     </div>
 
     <ul class="flags">
