@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HABLA Budget Tracker</title>
 <style>
   :root{
+    color-scheme:light;
     --ink:#1a2332; --muted:#5f6c7f; --line:#e3e8ef; --bg:#f6f8fb; --card:#fff;
     --good:#0f8a5f; --warn:#b8791b; --over:#c0392b; --accent:#2b5fa8;
+    --hero-bg:#0f2d52; --hero-text:#fff; --hero-muted:#b8cbe4;
+    --banner-bg:#fff8e6; --banner-border:#f0d9a0; --banner-text:#6b5210; --banner-strong:#4a3808;
+    --pill-bg:#fdecea; --bar-track:#eef1f6; --grp-bg:#f4f7fb; --thead-bg:#fafbfd;
+    --row-line:#f0f3f7; --code-muted:#9aa7b8; --input-bg:#fff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ink:#e8ecf3; --muted:#8b96a8; --line:#2a3242; --bg:#0f1420; --card:#161d2b;
+      --good:#3ddc97; --warn:#e0a84f; --over:#ff6b5c; --accent:#6fa8dc;
+      --hero-bg:#16345c; --hero-text:#fff; --hero-muted:#a9c3e0;
+      --banner-bg:#2a2410; --banner-border:#4a3f1a; --banner-text:#e8d9a0; --banner-strong:#f5e7b0;
+      --pill-bg:rgba(255,107,92,.16); --bar-track:#232b3c; --grp-bg:#1b2334; --thead-bg:#141a26;
+      --row-line:#212938; --code-muted:#5f6c82; --input-bg:#131a27;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ink:#e8ecf3; --muted:#8b96a8; --line:#2a3242; --bg:#0f1420; --card:#161d2b;
+    --good:#3ddc97; --warn:#e0a84f; --over:#ff6b5c; --accent:#6fa8dc;
+    --hero-bg:#16345c; --hero-text:#fff; --hero-muted:#a9c3e0;
+    --banner-bg:#2a2410; --banner-border:#4a3f1a; --banner-text:#e8d9a0; --banner-strong:#f5e7b0;
+    --pill-bg:rgba(255,107,92,.16); --bar-track:#232b3c; --grp-bg:#1b2334; --thead-bg:#141a26;
+    --row-line:#212938; --code-muted:#5f6c82; --input-bg:#131a27;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
@@ -20,42 +40,42 @@
   .card .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
   .card .val{font-size:27px;font-weight:650;letter-spacing:-.02em}
   .card .note{font-size:13px;color:var(--muted);margin-top:4px}
-  .hero{background:#0f2d52;border-color:#0f2d52;color:#fff}
-  .hero .lbl,.hero .note{color:#b8cbe4}
-  .banner{background:#fff8e6;border:1px solid #f0d9a0;border-radius:10px;
-    padding:13px 16px;font-size:14px;margin:16px 0 22px;color:#6b5210}
-  .banner b{color:#4a3808}
+  .hero{background:var(--hero-bg);border-color:var(--hero-bg);color:var(--hero-text)}
+  .hero .lbl,.hero .note{color:var(--hero-muted)}
+  .banner{background:var(--banner-bg);border:1px solid var(--banner-border);border-radius:10px;
+    padding:13px 16px;font-size:14px;margin:16px 0 22px;color:var(--banner-text)}
+  .banner b{color:var(--banner-strong)}
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
   #q{flex:1;min-width:240px;padding:12px 14px;font-size:15px;border:1px solid var(--line);
-    border-radius:9px;background:#fff;color:var(--ink)}
+    border-radius:9px;background:var(--input-bg);color:var(--ink)}
   #q:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
   .chips{display:flex;gap:6px;flex-wrap:wrap}
   .chip{padding:8px 13px;font-size:13px;border:1px solid var(--line);border-radius:20px;
-    background:#fff;cursor:pointer;color:var(--muted)}
+    background:var(--input-bg);cursor:pointer;color:var(--muted)}
   .chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:550}
   h2{font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
     margin:26px 0 10px;font-weight:600}
-  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
     border-radius:12px;overflow:hidden}
   th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
-    text-align:right;padding:11px 14px;background:#fafbfd;border-bottom:1px solid var(--line);font-weight:600}
+    text-align:right;padding:11px 14px;background:var(--thead-bg);border-bottom:1px solid var(--line);font-weight:600}
   th:first-child{text-align:left}
-  td{padding:11px 14px;border-bottom:1px solid #f0f3f7;text-align:right;
+  td{padding:11px 14px;border-bottom:1px solid var(--row-line);text-align:right;
     font-variant-numeric:tabular-nums;font-size:14.5px}
   td:first-child{text-align:left}
   tr:last-child td{border-bottom:none}
-  tr.grp td{background:#f4f7fb;font-weight:600;font-size:12.5px;text-transform:uppercase;
+  tr.grp td{background:var(--grp-bg);font-weight:600;font-size:12.5px;text-transform:uppercase;
     letter-spacing:.05em;color:var(--muted);padding:9px 14px}
   .nm{font-weight:520}
-  .cd{color:#9aa7b8;font-size:12px;margin-right:7px;font-variant-numeric:tabular-nums}
-  .bar{height:6px;border-radius:3px;background:#eef1f6;overflow:hidden;margin-top:5px;width:118px;margin-left:auto}
+  .cd{color:var(--code-muted);font-size:12px;margin-right:7px;font-variant-numeric:tabular-nums}
+  .bar{height:6px;border-radius:3px;background:var(--bar-track);overflow:hidden;margin-top:5px;width:118px;margin-left:auto}
   .bar i{display:block;height:100%;border-radius:3px}
   .g{color:var(--good)} .w{color:var(--warn)} .o{color:var(--over);font-weight:600}
   .bg{background:var(--good)} .bw{background:var(--warn)} .bo{background:var(--over)}
   .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;
-    background:#fdecea;color:var(--over);margin-left:7px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-  tfoot td{font-weight:650;background:#fafbfd;border-top:2px solid var(--line);font-size:15px}
-  .empty{padding:26px;text-align:center;color:var(--muted);background:#fff;
+    background:var(--pill-bg);color:var(--over);margin-left:7px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  tfoot td{font-weight:650;background:var(--thead-bg);border-top:2px solid var(--line);font-size:15px}
+  .empty{padding:26px;text-align:center;color:var(--muted);background:var(--card);
     border:1px solid var(--line);border-radius:12px;font-size:14.5px}
   footer{margin-top:32px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
   @media(max-width:640px){
@@ -87,12 +107,10 @@
     td:first-child{padding-top:10px}
     td:first-child::before{content:none}
     .bar{display:none}
-    tfoot tr{background:#fafbfd;border-top:2px solid var(--line);padding:6px 0}
+    tfoot tr{background:var(--thead-bg);border-top:2px solid var(--line);padding:6px 0}
     tfoot td{font-size:14px}
   }
 </style>
-</head>
-<body>
 <div class="wrap">
   <header>
     <h1>HABLA Budget Tracker</h1>
@@ -143,7 +161,7 @@
 </div>
 
 <script>
-const D = {"asOf": "2026-09-28", "fyLabel": "FY27", "fyStart": "2026-07-01", "fyEnd": "2027-06-30", "pctYear": 0.2465753424657534, "elapsedDays": 90, "totalDays": 365, "revenue": [{"code": "4300", "name": "RG Food Drive Donations - Restricted", "group": "Restricted Income", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "4065", "name": "Yearbook", "group": "Unrestricted Income", "budget": 7000.0, "actual": 0.0, "remaining": 7000.0, "pct": 0.0}, {"code": "4615", "name": "Caminata", "group": "Cultural and Fundraising Events", "budget": 38000.0, "actual": 0.0, "remaining": 38000.0, "pct": 0.0}, {"code": "4620", "name": "Gala Night", "group": "Cultural and Fundraising Events", "budget": 51000.0, "actual": 500.0, "remaining": 50500.0, "pct": 0.00980392156862745}, {"code": "4645", "name": "Donation Drive", "group": "Cultural and Fundraising Events", "budget": 10500.0, "actual": 909.64, "remaining": 9590.36, "pct": 0.08663238095238095}, {"code": "4650", "name": "Baile de los Muertos", "group": "Cultural and Fundraising Events", "budget": 5000.0, "actual": 0.0, "remaining": 5000.0, "pct": 0.0}, {"code": "4710", "name": "Restaurant Nights", "group": "Cultural and Fundraising Events", "budget": 600.0, "actual": 0.0, "remaining": 600.0, "pct": 0.0}, {"code": "4625", "name": "RG Socials", "group": "Ongoing Fundraising", "budget": 5000.0, "actual": 0.0, "remaining": 5000.0, "pct": 0.0}, {"code": "4640", "name": "Merchandise Sales", "group": "Ongoing Fundraising", "budget": 1100.0, "actual": 304.8, "remaining": 795.2, "pct": 0.2770909090909091}, {"code": "4800", "name": "Interest Income", "group": "Unrestricted Income", "budget": 4000.0, "actual": 1043.16, "remaining": 2956.84, "pct": 0.26079}], "expenses": [{"code": "6010", "name": "Art Program", "group": "Essential Programs", "budget": 12680.0, "actual": 12680.0, "remaining": 0.0, "pct": 1.0}, {"code": "6045", "name": "Recess Support", "group": "Essential Programs", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6050", "name": "Music Program", "group": "Essential Programs", "budget": 15000.0, "actual": 15000.0, "remaining": 0.0, "pct": 1.0}, {"code": "6055", "name": "Science Workshops", "group": "Academic Enrichment", "budget": 17540.0, "actual": 17500.0, "remaining": 40.0, "pct": 0.9977194982896237}, {"code": "6530", "name": "Afterschool Enrichment", "group": "Academic Enrichment", "budget": 6500.0, "actual": 0.0, "remaining": 6500.0, "pct": 0.0}, {"code": "6531", "name": "Field Trips", "group": "Academic Enrichment", "budget": 2250.0, "actual": 0.0, "remaining": 2250.0, "pct": 0.0}, {"code": "6620", "name": "Teacher Reimbursement Grants", "group": "Academic Enrichment", "budget": 15300.0, "actual": 368.72, "remaining": 14931.28, "pct": 0.02409934640522876}, {"code": "6670", "name": "Middle School Learning Opportunities", "group": "Academic Enrichment", "budget": 8976.0, "actual": 0.0, "remaining": 8976.0, "pct": 0.0}, {"code": "6745", "name": "Math Festival", "group": "Academic Enrichment", "budget": 1000.0, "actual": 0.0, "remaining": 1000.0, "pct": 0.0}, {"code": "6025", "name": "Art Show", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6140", "name": "Community Engagement", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6145", "name": "40th Anniversary Celebration", "group": "Community Events", "budget": 8200.0, "actual": 0.0, "remaining": 8200.0, "pct": 0.0}, {"code": "6415", "name": "Baile de los Muertos", "group": "Community Events", "budget": 4000.0, "actual": 0.0, "remaining": 4000.0, "pct": 0.0}, {"code": "6735", "name": "Family Sports Night", "group": "Community Events", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6051", "name": "Yearbook", "group": "School and Community Support", "budget": 7001.0, "actual": 0.0, "remaining": 7001.0, "pct": 0.0}, {"code": "6310", "name": "School Beautification", "group": "School and Community Support", "budget": 375.0, "actual": 233.77, "remaining": 141.23, "pct": 0.6233866666666666}, {"code": "6320", "name": "Board Approved Special Project Fund", "group": "School and Community Support", "budget": 1346.0, "actual": 300.0, "remaining": 1046.0, "pct": 0.22288261515601784}, {"code": "6532", "name": "4th Grade Gold Rush", "group": "School and Community Support", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6539", "name": "5th Grade Science Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6546", "name": "8th Grade Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6610", "name": "Teacher and Staff Appreciation", "group": "School and Community Support", "budget": 2000.0, "actual": 428.49, "remaining": 1571.51, "pct": 0.214245}, {"code": "6630", "name": "VISA", "group": "School and Community Support", "budget": 550.0, "actual": 0.0, "remaining": 550.0, "pct": 0.0}, {"code": "6685", "name": "Student Activities and Celebrations", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6710", "name": "Child Care - Meetings and Events", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6715", "name": "RG Food Drive", "group": "School and Community Support", "budget": 1500.0, "actual": 0.0, "remaining": 1500.0, "pct": 0.0}, {"code": "6720", "name": "Hospitality", "group": "School and Community Support", "budget": 665.0, "actual": 0.0, "remaining": 665.0, "pct": 0.0}, {"code": "6110", "name": "Caminata", "group": "Fundraising Expenses", "budget": 10400.0, "actual": 0.0, "remaining": 10400.0, "pct": 0.0}, {"code": "6120", "name": "Gala Night", "group": "Fundraising Expenses", "budget": 21500.0, "actual": 9691.11, "remaining": 11808.89, "pct": 0.4507493023255814}, {"code": "6350", "name": "Merchandise", "group": "Fundraising Expenses", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6835", "name": "RG Socials", "group": "Fundraising Expenses", "budget": 1800.0, "actual": 0.0, "remaining": 1800.0, "pct": 0.0}, {"code": "6840", "name": "Merchandise Costs and Equipment", "group": "Fundraising Expenses", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6250", "name": "Website Fees", "group": "General and Administrative", "budget": 260.0, "actual": 221.2, "remaining": 38.80000000000001, "pct": 0.8507692307692307}, {"code": "6330", "name": "Communications", "group": "General and Administrative", "budget": 668.0, "actual": 563.9, "remaining": 104.10000000000002, "pct": 0.8441616766467066}, {"code": "6910", "name": "Bookkeeping", "group": "General and Administrative", "budget": 900.0, "actual": 0.0, "remaining": 900.0, "pct": 0.0}, {"code": "6920", "name": "QuickBooks Online Annual Fee", "group": "General and Administrative", "budget": 80.0, "actual": 0.0, "remaining": 80.0, "pct": 0.0}, {"code": "6925", "name": "Tax Preparation & Legal Fees", "group": "General and Administrative", "budget": 2000.0, "actual": 0.0, "remaining": 2000.0, "pct": 0.0}, {"code": "6928", "name": "Taxes and Fees", "group": "General and Administrative", "budget": 90.0, "actual": 20.0, "remaining": 70.0, "pct": 0.2222222222222222}, {"code": "6930", "name": "Insurance", "group": "General and Administrative", "budget": 800.0, "actual": 669.0, "remaining": 131.0, "pct": 0.83625}, {"code": "6935", "name": "Printing and Supplies", "group": "General and Administrative", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6940", "name": "Bank Charges", "group": "General and Administrative", "budget": 50.0, "actual": 0.0, "remaining": 50.0, "pct": 0.0}], "totals": {"revBudget": 122200.0, "revActual": 2757.6, "expBudget": 146031.0, "expActual": 57676.189999999995, "moneyLeft": 88354.81, "netBudget": -23831.0, "netActual": -54918.59}, "unbudgeted": []};
+const D = {"asOf": "2026-10-06", "fyLabel": "FY27", "fyStart": "2026-07-01", "fyEnd": "2027-06-30", "pctYear": 0.2684931506849315, "elapsedDays": 98, "totalDays": 365, "revenue": [{"code": "4300", "name": "RG Food Drive Donations - Restricted", "group": "Restricted Income", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "4065", "name": "Yearbook", "group": "Unrestricted Income", "budget": 7000.0, "actual": 0.0, "remaining": 7000.0, "pct": 0.0}, {"code": "4615", "name": "Caminata", "group": "Cultural and Fundraising Events", "budget": 38000.0, "actual": 0.0, "remaining": 38000.0, "pct": 0.0}, {"code": "4620", "name": "Gala Night", "group": "Cultural and Fundraising Events", "budget": 51000.0, "actual": 500.0, "remaining": 50500.0, "pct": 0.00980392156862745}, {"code": "4645", "name": "Donation Drive", "group": "Cultural and Fundraising Events", "budget": 10500.0, "actual": 909.64, "remaining": 9590.36, "pct": 0.08663238095238095}, {"code": "4650", "name": "Baile de los Muertos", "group": "Cultural and Fundraising Events", "budget": 5000.0, "actual": 0.0, "remaining": 5000.0, "pct": 0.0}, {"code": "4710", "name": "Restaurant Nights", "group": "Cultural and Fundraising Events", "budget": 600.0, "actual": 0.0, "remaining": 600.0, "pct": 0.0}, {"code": "4625", "name": "RG Socials", "group": "Ongoing Fundraising", "budget": 5000.0, "actual": 0.0, "remaining": 5000.0, "pct": 0.0}, {"code": "4640", "name": "Merchandise Sales", "group": "Ongoing Fundraising", "budget": 1100.0, "actual": 304.8, "remaining": 795.2, "pct": 0.2770909090909091}, {"code": "4800", "name": "Interest Income", "group": "Unrestricted Income", "budget": 4000.0, "actual": 1541.61, "remaining": 2458.3900000000003, "pct": 0.3854025}], "expenses": [{"code": "6010", "name": "Art Program", "group": "Essential Programs", "budget": 12680.0, "actual": 12680.0, "remaining": 0.0, "pct": 1.0}, {"code": "6045", "name": "Recess Support", "group": "Essential Programs", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6050", "name": "Music Program", "group": "Essential Programs", "budget": 15000.0, "actual": 15000.0, "remaining": 0.0, "pct": 1.0}, {"code": "6055", "name": "Science Workshops", "group": "Academic Enrichment", "budget": 17540.0, "actual": 17500.0, "remaining": 40.0, "pct": 0.9977194982896237}, {"code": "6530", "name": "Afterschool Enrichment", "group": "Academic Enrichment", "budget": 6500.0, "actual": 0.0, "remaining": 6500.0, "pct": 0.0}, {"code": "6531", "name": "Field Trips", "group": "Academic Enrichment", "budget": 2250.0, "actual": 0.0, "remaining": 2250.0, "pct": 0.0}, {"code": "6620", "name": "Teacher Reimbursement Grants", "group": "Academic Enrichment", "budget": 15300.0, "actual": 368.72, "remaining": 14931.28, "pct": 0.02409934640522876}, {"code": "6670", "name": "Middle School Learning Opportunities", "group": "Academic Enrichment", "budget": 8976.0, "actual": 1631.68, "remaining": 7344.32, "pct": 0.1817825311942959}, {"code": "6745", "name": "Math Festival", "group": "Academic Enrichment", "budget": 1000.0, "actual": 0.0, "remaining": 1000.0, "pct": 0.0}, {"code": "6025", "name": "Art Show", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6140", "name": "Community Engagement", "group": "Community Events", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6145", "name": "40th Anniversary Celebration", "group": "Community Events", "budget": 8200.0, "actual": 0.0, "remaining": 8200.0, "pct": 0.0}, {"code": "6415", "name": "Baile de los Muertos", "group": "Community Events", "budget": 4000.0, "actual": 0.0, "remaining": 4000.0, "pct": 0.0}, {"code": "6735", "name": "Family Sports Night", "group": "Community Events", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6051", "name": "Yearbook", "group": "School and Community Support", "budget": 7001.0, "actual": 0.0, "remaining": 7001.0, "pct": 0.0}, {"code": "6310", "name": "School Beautification", "group": "School and Community Support", "budget": 375.0, "actual": 233.77, "remaining": 141.23, "pct": 0.6233866666666666}, {"code": "6320", "name": "Board Approved Special Project Fund", "group": "School and Community Support", "budget": 1346.0, "actual": 300.0, "remaining": 1046.0, "pct": 0.22288261515601784}, {"code": "6532", "name": "4th Grade Gold Rush", "group": "School and Community Support", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6539", "name": "5th Grade Science Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6546", "name": "8th Grade Camp/Promotion", "group": "School and Community Support", "budget": 500.0, "actual": 0.0, "remaining": 500.0, "pct": 0.0}, {"code": "6610", "name": "Teacher and Staff Appreciation", "group": "School and Community Support", "budget": 2000.0, "actual": 474.42, "remaining": 1525.58, "pct": 0.23721}, {"code": "6630", "name": "VISA", "group": "School and Community Support", "budget": 550.0, "actual": 60.32, "remaining": 489.68, "pct": 0.10967272727272727}, {"code": "6685", "name": "Student Activities and Celebrations", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6710", "name": "Child Care - Meetings and Events", "group": "School and Community Support", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6715", "name": "RG Food Drive", "group": "School and Community Support", "budget": 1500.0, "actual": 0.0, "remaining": 1500.0, "pct": 0.0}, {"code": "6720", "name": "Hospitality", "group": "School and Community Support", "budget": 665.0, "actual": 0.0, "remaining": 665.0, "pct": 0.0}, {"code": "6110", "name": "Caminata", "group": "Fundraising Expenses", "budget": 10400.0, "actual": 0.0, "remaining": 10400.0, "pct": 0.0}, {"code": "6120", "name": "Gala Night", "group": "Fundraising Expenses", "budget": 21500.0, "actual": 9691.11, "remaining": 11808.89, "pct": 0.4507493023255814}, {"code": "6350", "name": "Merchandise", "group": "Fundraising Expenses", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6835", "name": "RG Socials", "group": "Fundraising Expenses", "budget": 1800.0, "actual": 0.0, "remaining": 1800.0, "pct": 0.0}, {"code": "6840", "name": "Merchandise Costs and Equipment", "group": "Fundraising Expenses", "budget": 0.0, "actual": 0.0, "remaining": 0.0, "pct": null}, {"code": "6250", "name": "Website Fees", "group": "General and Administrative", "budget": 260.0, "actual": 221.2, "remaining": 38.80000000000001, "pct": 0.8507692307692307}, {"code": "6330", "name": "Communications", "group": "General and Administrative", "budget": 668.0, "actual": 563.9, "remaining": 104.10000000000002, "pct": 0.8441616766467066}, {"code": "6910", "name": "Bookkeeping", "group": "General and Administrative", "budget": 900.0, "actual": 0.0, "remaining": 900.0, "pct": 0.0}, {"code": "6920", "name": "QuickBooks Online Annual Fee", "group": "General and Administrative", "budget": 80.0, "actual": 0.0, "remaining": 80.0, "pct": 0.0}, {"code": "6925", "name": "Tax Preparation & Legal Fees", "group": "General and Administrative", "budget": 2000.0, "actual": 0.0, "remaining": 2000.0, "pct": 0.0}, {"code": "6928", "name": "Taxes and Fees", "group": "General and Administrative", "budget": 90.0, "actual": 20.0, "remaining": 70.0, "pct": 0.2222222222222222}, {"code": "6930", "name": "Insurance", "group": "General and Administrative", "budget": 800.0, "actual": 669.0, "remaining": 131.0, "pct": 0.83625}, {"code": "6935", "name": "Printing and Supplies", "group": "General and Administrative", "budget": 200.0, "actual": 0.0, "remaining": 200.0, "pct": 0.0}, {"code": "6940", "name": "Bank Charges", "group": "General and Administrative", "budget": 50.0, "actual": 0.0, "remaining": 50.0, "pct": 0.0}], "totals": {"revBudget": 122200.0, "revActual": 3256.0499999999997, "expBudget": 146031.0, "expActual": 59414.12, "moneyLeft": 86616.88, "netBudget": -23831.0, "netActual": -56158.07}, "unbudgeted": []};
 
 const fmt = n => (n<0?"-":"") + "$" + Math.abs(Math.round(n)).toLocaleString();
 const pct = n => Math.round(n*100) + "%";
@@ -306,5 +324,3 @@ document.querySelectorAll(".chip").forEach(c =>
   }));
 apply();
 </script>
-</body>
-</html>
